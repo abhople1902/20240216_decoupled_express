@@ -1,0 +1,162 @@
+[
+  {
+      "id": 1,
+      "name": "Laptop",
+      "description": "High-performance laptop with advanced features",
+      "price": 999.99,
+      "stock": 50,
+      "image": "https://example.com/images/laptop.jpg"
+  },
+  {
+      "id": 2,
+      "name": "Smartphone",
+      "description": "Latest smartphone with cutting-edge technology",
+      "price": 699.99,
+      "stock": 100,
+      "image": "https://example.com/images/smartphone.jpg"
+  },
+  {
+      "id": 3,
+      "name": "Headphones",
+      "description": "Noise-canceling headphones for immersive audio experience",
+      "price": 149.99,
+      "stock": 75,
+      "image": "https://example.com/images/headphones.jpg"
+  },
+  {
+      "id": 4,
+      "name": "Tablet",
+      "description": "Portable tablet for work and entertainment",
+      "price": 299.99,
+      "stock": 30,
+      "image": "https://example.com/images/tablet.jpg"
+  },
+  {
+      "id": 5,
+      "name": "Smart Watch",
+      "description": "Fitness tracker with heart rate monitoring",
+      "price": 129.99,
+      "stock": 80,
+      "image": "https://example.com/images/smartwatch.jpg"
+  },
+  {
+      "id": 6,
+      "name": "Wireless Earbuds",
+      "description": "True wireless earbuds for on-the-go audio",
+      "price": 79.99,
+      "stock": 60,
+      "image": "https://example.com/images/earbuds.jpg"
+  },
+  {
+      "id": 7,
+      "name": "Gaming Console",
+      "description": "Next-gen gaming console for immersive gameplay",
+      "price": 499.99,
+      "stock": 25,
+      "image": "https://example.com/images/gamingconsole.jpg"
+  },
+  {
+      "id": 8,
+      "name": "4K Smart TV",
+      "description": "Ultra HD smart TV with streaming capabilities",
+      "price": 899.99,
+      "stock": 40,
+      "image": "https://example.com/images/smarttv.jpg"
+  },
+  {
+      "id": 9,
+      "name": "Camera",
+      "description": "Professional camera for stunning photography",
+      "price": 799.99,
+      "stock": 20,
+      "image": "https://example.com/images/camera.jpg"
+  },
+  {
+      "id": 10,
+      "name": "Portable Speaker",
+      "description": "Bluetooth speaker for outdoor adventures",
+      "price": 59.99,
+      "stock": 70,
+      "image": "https://example.com/images/speaker.jpg"
+  },
+  {
+      "id": 11,
+      "name": "External Hard Drive",
+      "description": "High-capacity external storage for backups",
+      "price": 129.99,
+      "stock": 35,
+      "image": "https://example.com/images/harddrive.jpg"
+  },
+  {
+      "id": 12,
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse for comfortable computing",
+      "price": 29.99,
+      "stock": 90,
+      "image": "https://example.com/images/mouse.jpg"
+  },
+  {
+      "id": 13,
+      "name": "Fitness Tracker",
+      "description": "Activity tracker with sleep monitoring",
+      "price": 49.99,
+      "stock": 55,
+      "image": "https://example.com/images/fitnesstracker.jpg"
+  },
+  {
+      "id": 14,
+      "name": "Bluetooth Keyboard",
+      "description": "Wireless keyboard for enhanced productivity",
+      "price": 39.99,
+      "stock": 65,
+      "image": "https://example.com/images/keyboard.jpg"
+  },
+  {
+      "id": 15,
+      "name": "Printers",
+      "description": "All-in-one printer for home or office use",
+      "price": 199.99,
+      "stock": 45,
+      "image": "https://example.com/images/printer.jpg"
+  },
+  {
+      "id": 16,
+      "name": "Wireless Router",
+      "description": "High-speed wireless router for seamless internet connectivity",
+      "price": 79.99,
+      "stock": 30,
+      "image": "https://example.com/images/router.jpg"
+  },
+  {
+      "id": 17,
+      "name": "Power Bank",
+      "description": "Portable charger for smartphones and tablets",
+      "price": 24.99,
+      "stock": 85,
+      "image": "https://example.com/images/powerbank.jpg"
+  },
+  {
+      "id": 18,
+      "name": "Home Security Camera",
+      "description": "Smart home security camera for remote monitoring",
+      "price": 149.99,
+      "stock": 15,
+      "image": "https://example.com/images/securitycamera.jpg"
+  },
+  {
+      "id": 19,
+      "name": "Wireless Charger",
+      "description": "Qi-certified wireless charger for fast charging",
+      "price": 34.99,
+      "stock": 50,
+      "image": "https://example.com/images/wirelesscharger.jpg"
+  },
+  {
+      "id": 20,
+      "name": "VR Headset",
+      "description": "Virtual reality headset for immersive gaming experiences",
+      "price": 299.99,
+      "stock": 10,
+      "image": "https://example.com/images/vrheadset.jpg"
+  }
+]
