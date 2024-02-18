@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
@@ -7,6 +8,14 @@ const PORT = 3000;
 
 const path = require('path');
 const readline = require('readline');
+
+
+
+mongoose.connect('mongodb://localhost:27017/your_database_name', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 
 
 const {
@@ -28,7 +37,7 @@ const {
   directoryPath,
   newDirname,
   mainDirPath
-} = require("./expressCommerce");
+} = require("./jsonwala");
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
