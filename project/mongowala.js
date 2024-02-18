@@ -1,70 +1,87 @@
-const Product = require('./products.json');
+// const Product = require('./products.json');
+const mongoose = require('mongoose');
+
+//Schema
+const productSchema = new mongoose.Schema({
+  id: {
+    type: Number
+  },
+  name: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  price: {
+    type: Number
+  },
+  stock: {
+    type: Number
+  },
+  image: {
+    type: String
+  },
+},
+  {
+    timestamps: true
+  }
+);
+
+const Product = mongoose.model("product", productSchema);
 
 // Create a new product
 exports.createProduct = async (req, res) => {
-  try {
-    const { name, price } = req.body;
-    const newProduct = new Product({ name, price });
-    await newProduct.save();
-    res.status(201).json(newProduct);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  const body = req.body;
+  if (
+    !body.id ||
+    !body.name ||
+    !body.description ||
+    !body.price ||
+    !body.stock ||
+    !body.image
+  ) {
+    return res.status(400).json({ error: 'All fields are required' });
   }
+  const result = await Product.create({
+    id: body.id,
+    name: body.name,
+    description: body.description,
+    price: body.price,
+    stock: body.stock,
+    image: body.image
+  });
+  return res.status(201).json({ msg: "success" });
 };
 
 // Get all products
 exports.getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  const allProducts = await Product.find({});
+  const html = `
+  <ul>
+  ${allProducts.map(product => `<li>${product.name} - ${product.description}</li>`).join('')}
+  </ul>
+  `;
+  res.send(html);
 };
 
 // Get product by ID
 exports.getProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  const prod = await Product.findById(req.params.id);
+  if(!prod) {
+    return res.status(404).json({error: "Product not found"});
+  } else {
+    return res.json(prod);
   }
 };
 
 // Update product by ID
 exports.updateProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const { name, price } = req.body;
-    const updatedProduct = await Product.findByIdAndUpdate(
-      productId,
-      { name, price },
-      { new: true }
-    );
-    if (!updatedProduct) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-    res.json(updatedProduct);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  const newProd = await Product.findByIdAndUpdate(req.params.id, req.body);
+  return res.json({ msg: "success" }, { status: 200 }, { newProd });
 };
 
 // Delete product by ID
 exports.deleteProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const deletedProduct = await Product.findByIdAndDelete(productId);
-    if (!deletedProduct) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-    res.json(deletedProduct);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  Product.findByIdAndDelete(req.params.id);
+  return res.json({ msg: "success" });
 };
