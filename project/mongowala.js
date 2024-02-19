@@ -1,33 +1,8 @@
 // const Product = require('./products.json');
 const mongoose = require('mongoose');
 
-//Schema
-const productSchema = new mongoose.Schema({
-  id: {
-    type: Number
-  },
-  name: {
-    type: String
-  },
-  description: {
-    type: String
-  },
-  price: {
-    type: Number
-  },
-  stock: {
-    type: Number
-  },
-  image: {
-    type: String
-  },
-},
-  {
-    timestamps: true
-  }
-);
-
-const Product = mongoose.model("product", productSchema);
+const Product = require('./mongoSchemaProducts.js')
+const Order = require('./mongoSchemaOrders.js')
 
 // Create a new product
 exports.createProduct = async (req, res) => {
@@ -77,6 +52,7 @@ exports.getProductById = async (req, res) => {
 // Update product by ID
 exports.updateProductById = async (req, res) => {
   const newProd = await Product.findByIdAndUpdate(req.params.id, req.body);
+  console.log(newProd)
   return res.json({ msg: "success" }, { status: 200 }, { newProd });
 };
 
@@ -84,4 +60,35 @@ exports.updateProductById = async (req, res) => {
 exports.deleteProductById = async (req, res) => {
   Product.findByIdAndDelete(req.params.id);
   return res.json({ msg: "success" });
+};
+
+
+
+
+/**
+ * Functions for Order collection manipulation
+ */
+exports.createOrder = async (req, res) => {
+  const body = req.body;
+  if (
+    !body.O_id ||
+    !body.O_date ||
+    !body.O_address ||
+    !body.O_P_id ||
+    !body.O_Status ||
+    !body.O_qty ||
+    !body.O_TotalCost
+  ) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+  const result = await Order.create({
+    O_id: body.O_id,
+    O_date: body.O_date,
+    O_address: body.O_address,
+    O_P_id: body.O_P_id,
+    O_Status: body.O_Status,
+    O_qty: body.O_qty,
+    O_TotalCost: body.O_TotalCost
+  });
+  return res.status(201).json({ msg: "success" });
 };

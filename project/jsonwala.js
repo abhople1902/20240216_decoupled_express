@@ -1,100 +1,3 @@
-// const fs = require('fs');
-// const path = require('path');
-
-// const dataFolderPath = '/Users/abhople/Documents/20240215_express_commerce';
-
-// // Ensure the data folder exists
-// if (!fs.existsSync(dataFolderPath)) {
-//     fs.mkdirSync(dataFolderPath);
-// }
-
-// // Helper function to generate a unique ID for a new record
-// function generateUniqueId(table) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     if (!fs.existsSync(filePath)) {
-//         return 1;
-//     }
-
-//     const data = JSON.parse(fs.readFileSync(filePath));
-//     const lastId = data[data.length - 1].id;
-//     return lastId + 1;
-// }
-
-// // Function to add a new record to a table
-// function addToTable(table, record) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     const data = JSON.parse(fs.readFileSync(filePath));
-//     record.id = generateUniqueId(table);
-//     data.push(record);
-//     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-// }
-
-// // Function to retrieve all records from a table
-// function getAllFromTable(table) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     if (!fs.existsSync(filePath)) {
-//         return [];
-//     }
-//     return JSON.parse(fs.readFileSync(filePath));
-// }
-
-// // Function to retrieve a record by ID from a table
-// function getByIdFromTable(table, id) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     if (!fs.existsSync(filePath)) {
-//         return null;
-//     }
-//     const data = JSON.parse(fs.readFileSync(filePath));
-//     return data.find(record => record.id === id);
-// }
-
-// // Function to update a record in a table
-// function updateInTable(table, id, newData) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     if (!fs.existsSync(filePath)) {
-//         return false;
-//     }
-//     const data = JSON.parse(fs.readFileSync(filePath));
-//     const index = data.findIndex(record => record.id === id);
-//     if (index !== -1) {
-//         data[index] = { ...data[index], ...newData };
-//         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-//         return true;
-//     }
-//     return false;
-// }
-
-// // Function to delete a record from a table
-// function deleteFromTable(table, id) {
-//     const filePath = path.join(dataFolderPath, `${table}.json`);
-//     if (!fs.existsSync(filePath)) {
-//         return false;
-//     }
-//     const data = JSON.parse(fs.readFileSync(filePath));
-//     const newData = data.filter(record => record.id !== id);
-//     if (newData.length !== data.length) {
-//         fs.writeFileSync(filePath, JSON.stringify(newData, null, 2));
-//         return true;
-//     }
-//     return false;
-// }
-
-// // Create the initial JSON files for products and orders if they don't exist
-// const initialProductsData = [];
-// const initialOrdersData = [];
-// fs.writeFileSync(path.join(dataFolderPath, 'products.json'), JSON.stringify(initialProductsData, null, 2));
-// fs.writeFileSync(path.join(dataFolderPath, 'orders.json'), JSON.stringify(initialOrdersData, null, 2));
-
-// module.exports = {
-//     addToTable,
-//     getAllFromTable,
-//     getByIdFromTable,
-//     updateInTable,
-//     deleteFromTable
-// };
-
-
-
 
 // Description: File I/O operations using Node.js
 
@@ -111,8 +14,8 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const mainDirPath = '/Users/abhople/Documents/20240209_/';
-const directoryPath = '/Users/abhople/Documents/20240209_/testDir';
+const mainDirPath = '/Users/abhople/Documents/20240216_decoupled_express/project/';
+const directoryPath = '/Users/abhople/Documents/20240216_decoupled_express/project/data/';
 const newDirname = 'newtestDir';
 let DirFlag = false
 let fileFlag = false
