@@ -63,7 +63,7 @@ exports.deleteProductById = async (req, res) => {
 };
 
 
-
+///////////ORDERS
 
 /**
  * Functions for Order collection manipulation
@@ -91,4 +91,104 @@ exports.createOrder = async (req, res) => {
     O_TotalCost: body.O_TotalCost
   });
   return res.status(201).json({ msg: "success" });
+};
+
+// Get order by ID
+exports.getOrderById = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    res.json(order);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Update order by ID
+exports.updateOrderById = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const { user, products, totalPrice } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { user, products, totalPrice },
+      { new: true }
+    );
+    if (!updatedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    res.json(updatedOrder);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Delete order by ID
+exports.cancelOrderById = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+    if (!deletedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    res.json(deletedOrder);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+// Checkout Order
+exports.checkout = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const { user, products } = req.body;
+    // Iterate through the products in the order
+    for (const { productId, quantity } of products) {
+      // Find the product by its ID
+      const product = await Product.findById(productId).session(session);
+      if (!product) {
+        await session.abortTransaction();
+        session.endSession();
+        return res.status(404).json({ error: `Product with ID ${productId} not found` });
+      }
+
+      // Check if the available stock is sufficient for the order
+      if (product.stock < quantity) {
+        await session.abortTransaction();
+        session.endSession();
+        return res.status(400).json({ error: `Insufficient stock for product ${product.name}` });
+      }
+
+      // Update the stock of the product
+      product.stock -= quantity;
+      await product.save({ session });
+    }
+
+    // Create the order
+    const totalPrice = products.reduce((acc, { productId, quantity }) => {
+      const product = products.find(p => p.productId === productId);
+      return acc + (product.price * quantity);
+    }, 0);
+
+    // Call createOrder function to create the order
+    await createOrder({ user, products, totalPrice }, session);
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    res.status(200).json({ message: 'Checkout successful' });
+  } catch (error) {
+    // Rollback the transaction in case of an error
+    await session.abortTransaction();
+    session.endSession();
+
+    res.status(500).json({ error: error.message });
+  }
 };

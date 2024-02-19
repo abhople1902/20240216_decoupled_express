@@ -163,13 +163,6 @@ async function createSchema() {
  * @returns {null}
  */
 function readJsonFile(filePath, callback) {
-  // try {
-  //   const jsonData = fs.readFile(filePath, 'utf8');
-  //   return JSON.parse(jsonData);
-  // } catch (error) {
-  //   console.error(`Error reading JSON file: ${error}`);
-  //   return null;
-  // }
   fs.readFile(filePath, 'utf8', (err, data) => {
     if(err) {
       console.error("Enter reading JSON file:", err);
@@ -437,6 +430,7 @@ module.exports = {
   updateDirectoryName,
   updateFileName,
   appendSchema,
+  createOrder,
   updateJsonKeys,
   updateJsonValues,
   deleteFile,
