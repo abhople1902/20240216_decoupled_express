@@ -1,7 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const mongoFuncs = require('./mongowala.js');
+const mongoFuncs = require('./models/mongowala.js');
 const dummyData = require('./data/products.json');
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 
-let bigFlag = true
+let bigFlag = true;
 
 
 
@@ -29,31 +29,12 @@ if (bigFlag) {
 
   // // Routes using orderController mongoFuncs functions
   app.post('/orders', mongoFuncs.createOrder);
+  app.get('/orders/:id', mongoFuncs.getOrderById);
+  app.put('/orders/:id', mongoFuncs.updateOrderById);
+  app.delete('/orders/:id', mongoFuncs.cancelOrderById);
+  app.post('/orders/checkout', mongoFuncs.checkout);
+
 } else {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -83,7 +64,7 @@ if (bigFlag) {
     directoryPath,
     newDirname,
     mainDirPath
-  } = require("./jsonwala");
+  } = require("./models/jsonwala.js");
   // Middleware to parse JSON bodies
   app.use(bodyParser.json());
 
@@ -94,8 +75,8 @@ if (bigFlag) {
 
 
   // Load products and orders data from JSON files
-  let products = JSON.parse(fs.readFileSync('products.json'));
-  let orders = JSON.parse(fs.readFileSync('orders.json'));
+  let products = JSON.parse(fs.readFileSync('./data/products.json'));
+  let orders = JSON.parse(fs.readFileSync('./data/orders.json'));
 
   // Endpoint to get all products
   app.get('/products', (req, res) => {
