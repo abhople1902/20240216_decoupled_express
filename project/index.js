@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const mongoFuncs = require('./models/mongowala.js');
 const dummyData = require('./data/products.json');
+const cors = require('cors')
 
 const app = express();
 
@@ -12,6 +13,7 @@ mongoose.connect('mongodb+srv://Ayush:2BXNWx4qaZkr3C5y@cluster0.ijs1ymf.mongodb.
 
 
 app.use(express.json());
+app.use(cors());
 
 
 
